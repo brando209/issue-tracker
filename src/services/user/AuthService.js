@@ -1,6 +1,5 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const config = require('../../config');
 const { Users } = require('../../database/models');
 
 class AuthService {
@@ -49,7 +48,7 @@ class AuthService {
             lastName: user.lastName,
             userName: user.userName,
             email: user.email
-        }, config.tokenSecret);
+        }, process.env.TOKEN_SECRET);
     }
 
 }
