@@ -1,0 +1,6 @@
+textarea {
+    width: 100%;
+}
+.component-wrapper:hover {
+    cursor: pointer;
+}

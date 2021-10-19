@@ -1,0 +1,41 @@
+.list-container {
+    padding: 1vh 1vw;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.list-container .list-item {
+    margin: 1vh 0 2vh 0;
+}
+
+.list-container .list-item-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+.list-container .list-item-group .list-item {
+    margin: 0;
+    border: 1px solid black;
+}
+
+.list-container .list-item-group > .group-header {
+    text-align: start;
+    padding-left: 1em;
+    border: 1px solid black;
+    border-bottom: none;
+    min-height: 2em;
+    font-weight: bold;
+    background: cornflowerblue;
+}
+
+.list-container .list-item-group > .group-header.collapsed {
+    border-bottom: 1px solid black;
+}
+
+.list-container .list-item-group > .empty-group-message {
+    min-height: 2em;
+    background: white;
+    border: 1px solid black;
+}

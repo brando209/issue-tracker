@@ -1,0 +1,27 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    
+    background: rgb(170, 170, 170);
+    border-radius: 1em;
+    padding: 1em 2em;
+}
+
+.form > .row {
+    margin: 0.25em;
+    justify-content: center;
+}
+
+/* Selector for labels of the form */
+.form > .row > .col:first-child {
+    text-align: right;
+}
+
+/* Selector for inputs of the form */
+.form > .row > .col:nth-child(2){
+    text-align: left;
+}
+/* Selector for error message of the form */
+.form-error {
+    color: red;
+}

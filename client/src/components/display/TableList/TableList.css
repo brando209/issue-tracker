@@ -1,0 +1,16 @@
+.table {
+    max-width: 95vw;
+    margin: 5vh 2.5vw;
+}
+
+.table-header > :first-child {
+    background: darkslategrey;
+}
+
+.table-header > :nth-child(2) {
+    background: rgb(15, 128, 128);
+}
+
+.table-body > tr > :last-child {
+    width: 10vw;
+}

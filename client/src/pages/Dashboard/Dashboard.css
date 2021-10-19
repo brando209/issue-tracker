@@ -1,0 +1,40 @@
+.tile-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+    align-content: center;
+
+    padding: 2em 0;
+}
+
+.tile {
+    text-align: center;
+    font-size: xx-large;
+
+    min-height: 200px;
+    max-height: 300px;
+    min-width: 200px;
+    max-width: 300px;
+
+    padding: 130px 1em;
+    margin: 10px;
+}
+
+@media (max-width: 800px) {
+    .tile {
+        font-size: small;
+
+        min-height: 100px;
+        min-width: 100px;
+
+        padding: 50px 1em;
+        margin: 2px;
+    }
+}
+
+@media (max-width: 400px) {
+    .tile-container {
+        display: flex;
+        flex-direction: column;
+    }
+}

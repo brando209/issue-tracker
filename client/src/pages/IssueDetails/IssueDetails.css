@@ -1,0 +1,32 @@
+.IssueDetails {
+    background-color: rgb(197, 197, 197);
+}
+
+.IssueDetails > * > :nth-child(1) {
+    text-align: right;
+}
+.IssueDetails > form > * > :nth-child(1) {
+    text-align: right;
+}
+.IssueDetails > form > * {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+/* 
+[.IssueDetails > * > :nth-child(1)] before [.IssueDetails > .title *] 
+or title not centered due to specificity reasons
+*/
+.IssueDetails > .title * {
+    text-align: center;
+}
+.IssueDetails > form > .title * {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.IssueDetails > * > :nth-child(2) {
+    text-align: left;
+}
+.IssueDetails > form > * > :nth-child(2) {
+    text-align: left;
+}

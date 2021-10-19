@@ -1,0 +1,27 @@
+.notification-banner-container {
+    position: fixed;
+    left: 25%;
+    top: 1vh;
+    width: 50vw;
+    z-index: 2;
+
+    display: none;          /* Hide banner by default */
+    flex-direction: row;
+    justify-content: center;
+
+    background-color: rgba(146, 146, 146, 0.5);
+    border-radius: 5px;
+}
+
+.notification-banner-container.show {
+    display: flex;
+}
+
+.notification-banner {
+    height: 100%;
+    width: 100%;
+    padding: 4px;
+    background-color: rgba(114, 212, 250, 0.7);
+    border-radius: 5px;
+}
+

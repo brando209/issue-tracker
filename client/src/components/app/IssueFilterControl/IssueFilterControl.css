@@ -1,0 +1,13 @@
+.filterDropdown > .dropdown-menu {
+    width: 550px;
+}
+
+.filterDropdown > .dropdown-menu .filters {
+    display: flex;
+    flex-direction: row;
+}
+
+.checkmark {
+    display: inline-block;
+    font-size: 1.5rem;
+}

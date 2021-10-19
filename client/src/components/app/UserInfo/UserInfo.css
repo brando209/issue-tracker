@@ -1,0 +1,28 @@
+.user-info {
+    width: 60%;
+    min-width: 60%;
+    justify-content: center;
+    padding: 5px;
+}
+
+.label {
+    text-align: right;
+    font-size: large;
+}
+
+.user-detail {
+    text-align: left;
+    font-weight: 200;
+}
+
+@media (max-width: 768px) {
+    .label, .user-detail {
+        text-align: center;
+    }
+}
+
+@media (max-width: 400px) {
+    .user-detail {
+        text-align: center;
+    }
+}

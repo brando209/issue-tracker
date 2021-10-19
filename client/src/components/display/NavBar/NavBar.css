@@ -1,0 +1,46 @@
+.NavBar {
+    display: flex;
+    flex-direction: row;
+    min-height: 8vmin;
+}
+
+.NavBar #brand .logo {
+    max-height: 7vmin;
+    pointer-events: none;   
+}
+
+.NavBar.bg-dark #brand {
+    color: rgb(237, 237, 237);
+}
+
+.NavBar.bg-dark {
+    color: rgb(237, 237, 237);
+}
+
+.NavBar.bg-light #brand {
+    color: rgb(38, 38, 38);
+}
+
+.NavBar.bg-light {
+    color: rgb(38, 38, 38);
+}
+
+.navbar-nav {
+    width: 100%;
+    justify-content: flex-end;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .NavBar .logo {
+        animation: Logo-spin infinite 20s linear;
+    }
+}
+
+@keyframes Logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+}
