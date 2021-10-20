@@ -1,0 +1,13 @@
+.text-input-container label {
+    float: left;
+}
+ 
+.text-input-container {
+    margin: 0;
+    padding: 0;
+}
+
+.text-input-container input[type="text"], 
+.text-input-container input[type="password"] {
+    margin: 0 0.5rem 1rem;
+}

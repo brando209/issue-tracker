@@ -8,24 +8,12 @@ const connectionOptions = {
     database: process.env.DB_NAME,
 }
 
-const connection = (process.env.JAWSDB_URL) 
+const connection = (process.env.NODE_ENV === "production") 
     ? mysql.createConnection(process.env.JAWSDB_URL) 
     : mysql.createPool({
         connectionLimit:  1,
         ...connectionOptions
     });
-
-// connection.on('acquire', function (connection) {
-//     console.log('Connection %d acquired', connection.threadId);
-// });
-
-// connection.on('connection', (connect) => {
-//     console.log("Connection %d established", connect.threadId);
-// });
-
-// connection.on('release', function (connection) {
-//     console.log('Connection %d released', connection.threadId);
-// });
 
 const makeArray = val => (typeof val === "string" && val !== "*") || (typeof val === "object" && !Array.isArray(val)) && val !== null ? [val] : val;
 

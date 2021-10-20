@@ -1,8 +1,9 @@
 import React from 'react';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
 import { Link } from 'react-router-dom';
-import { Row, Col, Button} from 'react-bootstrap';
+import { Row, Button } from 'react-bootstrap';
 
+import TextInput from './inputs/TextInput/TextInput';
 import { LoginSchema } from '../../utility/schema/validation'
 
 function LoginForm({ onSubmit, ...props }) {
@@ -22,36 +23,28 @@ function LoginForm({ onSubmit, ...props }) {
         >
             {({ isSubmitting }) => (
                 <Form className="form">
-                    <Row as="h3">Log In</Row>
-                    <Row>
-                        <Col>
-                            <label htmlFor="userName">Username</label>
-                        </Col>
-                        <Col>
-                            <Field name="userName" type="text" className="form-input" />
-                            <ErrorMessage name="userName" className="form-error" />
-                        </Col>
+                    <Row as="h3" className="center-align heading">Login</Row>
+
+                    <Row as="h5" className="left-align subheading">Login to your account</Row>
+                    <Row as="p" className="left-align message">Welcome! You must log in to your account to view and manage your projects with [insert issue tracker name here]!</Row>
+
+                    <Row className="mx-4">
+                        <TextInput name="userName" type="text" label="Username" />
                     </Row>
 
-                    <Row>
-                        <Col>
-                            <label htmlFor="password">Password</label>
-                        </Col>
-                        <Col>
-                            <Field name="password" type="password" className="form-input" />
-                            <ErrorMessage name="password" className="form-error" />
-                        </Col>
+                    <Row className="mx-4">
+                        <TextInput name="password" type="password" label="Password" />
                     </Row>
 
                     {props.error && <div className="form-error">{props.error.message}</div>}
 
-                    <Row>
+                    <Row className="my-3">
                         <Button variant="primary" type="submit" disabled={isSubmitting}>
-                            Submit
+                            Login
                         </Button>
                     </Row>
 
-                    <p>Don't have an account yet? Please <Link to="signup">Sign up</Link> to continue.</p>
+                    <Row as="p" className="center-align message">Don't have an account yet? Please <Link to="signup">&nbsp;Sign up&nbsp;</Link> to continue.</Row>
                 </Form>
             )}
         </Formik>

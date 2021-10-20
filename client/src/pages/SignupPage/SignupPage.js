@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 
 import SignupForm from '../../components/form/SignupForm';
@@ -24,7 +24,11 @@ function SignupPage() {
             (auth.user || redirect) ?
                 <Redirect to="/" /> :
                 <Container fluid className="page">
-                    <SignupForm onSubmit={signup} />
+                    <Row className="form-container">
+                        <Col  xs={12} sm={10} md={8} xl={6}>
+                            <SignupForm onSubmit={signup} />
+                        </Col>
+                    </Row>
                 </Container>
     )
 }
