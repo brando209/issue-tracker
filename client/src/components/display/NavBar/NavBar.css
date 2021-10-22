@@ -2,7 +2,8 @@
     display: flex;
     flex-direction: row;
     height: 8vh;
-    max-height: 8vh;
+    min-height: 8vh;
+
 }
 
 .NavBar #brand .logo {
@@ -19,11 +20,23 @@
 }
 
 .NavBar.bg-light #brand {
-    color: rgb(38, 38, 38);
+    color: #282c34;
+    font-size: 2rem;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
 .NavBar.bg-light {
-    color: rgb(38, 38, 38);
+    background-image: linear-gradient(0deg, #9f9f9f, #888888 80%);
+}
+
+.NavBar.bg-light .btn {
+    color: #282c34;
+    border-color: #282c34;;
+}
+
+.NavBar.bg-light .btn:hover {
+    color: white;
+    background-color: #282c34;
 }
 
 .navbar-nav {

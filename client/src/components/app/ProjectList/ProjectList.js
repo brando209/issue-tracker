@@ -5,11 +5,13 @@ import ProjectListOverviewCard from './ProjectListOverviewCard';
 import './ProjectList.css';
 
 function ProjectList({ projectList, ...props }) {
-    return projectList ? 
+    return (
+        projectList ? 
         <List listItems={projectList} render={item => (
             <ProjectListOverviewCard project={item} {...props} />
         )}/> : 
         "No projects"
-}
+    );
+};
 
 export default ProjectList;

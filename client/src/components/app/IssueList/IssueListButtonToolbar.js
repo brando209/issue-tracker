@@ -21,19 +21,20 @@ const IssueListButtonToolbar = ({ projectId, issue, onDelete, onAssign, onStart,
     }
 
     return (
-        <ButtonToolbar style={{width: '100%'}}>
-            <ButtonGroup>
-                <LinkButton variant="primary" to={`/projects/${projectId}/issues/${issue.id}`}>View</LinkButton>
+        <ButtonToolbar className="issue-list-button-toolbar">
+            <ButtonGroup className="issue-list-button-group">
+                <LinkButton variant="primary" to={`/projects/${projectId}/issues/${issue.id}`} size="sm">View</LinkButton>
                 <Button 
-                    variant="primary" 
+                    variant="primary"
+                    size="sm"
                     onClick={handleAdvanceIssueClick}
                     disabled={issue.status === "resolved" || issue.status === "closed"}
 
                 >
                     {advanceIssueButtonText()}
                 </Button>
-                <DropdownButton as={ButtonGroup} variant="secondary" title="Settings">
-                    <Dropdown.Item >Edit Issue</Dropdown.Item>
+                <DropdownButton as={ButtonGroup} variant="secondary" size="sm" title="Settings">
+                    <Dropdown.Item>Edit Issue</Dropdown.Item>
                     <Dropdown.Item onClick={handleDeleteIssue}>Delete Issue</Dropdown.Item>
                 </DropdownButton>
             </ButtonGroup>

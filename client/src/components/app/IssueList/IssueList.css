@@ -1,0 +1,17 @@
+.issue-list-row > * {
+    color: #282c34;
+}
+
+.issue-list-card-container {
+    border-radius: 0;
+}
+
+.issue-list-card-body {
+    padding: 0.25rem 0.5rem;
+}
+
+@media (max-width: 680px)  {
+    .issue-list-button-toolbar {
+        justify-content: center;
+    }
+}

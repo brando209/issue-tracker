@@ -4,6 +4,10 @@
     min-height: calc(100% - 8vh);
 }
 
+.page.light {
+    background: #9f9f9f;
+}
+
 .page .form-container {
     justify-content: center;
     margin: 0 auto;

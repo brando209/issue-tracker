@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { Row, Col, Button } from 'react-bootstrap';
+import TextInput from './inputs/TextInput/TextInput';
 import { ProjectSchema } from '../../utility/schema/validation';
 
 function NewProjectForm({ onSubmit }) {
@@ -22,27 +23,11 @@ function NewProjectForm({ onSubmit }) {
                 <Form className="form">
                     <Row as="h3">Create New Project</Row>
 
-                    <Row>
-                        <Col>
-                            <label htmlFor="name">Project Name</label>
-                        </Col>
-                        <Col>
-                            <Field name="name" type="text" className="form-input" />
-                            <ErrorMessage name="name" className="form-error" />
-                        </Col>
-                    </Row>
+                    <TextInput name="name" type="text" label="Project name"/>
 
-                    <Row>
-                        <Col>
-                            <label htmlFor="description">Description</label>
-                        </Col>
-                        <Col>
-                            <Field name="description" as="textarea" className="form-input" />
-                            <ErrorMessage name="description" className="form-error" />
-                        </Col>
-                    </Row>
+                    <TextInput name="description" type="textarea" label="Project description"/>
 
-                    <Row>
+                    <Row className="my-4">
                         <Button variant="primary" type="submit" disabled={isSubmitting}>
                             Create Project
                         </Button>

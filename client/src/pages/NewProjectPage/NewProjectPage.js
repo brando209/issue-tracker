@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
+import { Container, Row, Col } from 'react-bootstrap';
 
 import useAuth from '../../hooks/useAuth';
 import NewProjectForm from '../../components/form/NewProjectForm';
@@ -19,11 +19,15 @@ function NewProjectPage(props) {
     }
 
     return (
-        redirect === true ? 
-        <Redirect to="/projects"/> :
-        <Container fluid className="page">
-            <NewProjectForm onSubmit={createNewProject} />
-        </Container>
+        redirect === true ?
+            <Redirect to="/projects" /> :
+            <Container fluid className="page">
+                <Row className="form-container">
+                    <Col xs={12} sm={8} md={5} xl={4}>
+                        <NewProjectForm onSubmit={createNewProject} />
+                    </Col>
+                </Row>
+            </Container>
     )
 }
 

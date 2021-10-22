@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 
 import useAuth from '../../hooks/useAuth';
 import useProjects from '../../hooks/useProjects';
@@ -58,13 +59,15 @@ function ProjectDashboard({ match }) {
             <Switch>
                 <Route path={match.url} exact render={() => (
                     <>
-                        <ProjectsNavBar />
-                        <ProjectList 
-                            projectList={projects.data} 
-                            onDelete={showDeleteProjectDialogBox} 
-                            onEdit={projects.handleEditProject} 
-                            onAddCollaborator={showAddCollaboratorDialogBox} 
-                        />
+                    <ProjectsNavBar />
+                        <Container className="page light" fluid>
+                            <ProjectList 
+                                projectList={projects.data} 
+                                onDelete={showDeleteProjectDialogBox} 
+                                onEdit={projects.handleEditProject} 
+                                onAddCollaborator={showAddCollaboratorDialogBox} 
+                            />
+                        </Container>
                     </>
                 )}/>
                 <Route path={`${match.url}/:projectId/issues/new`} exact render={(routerProps) => 

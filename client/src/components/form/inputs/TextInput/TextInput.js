@@ -4,14 +4,23 @@ import { FormControl } from 'react-bootstrap';
 
 import './TextInput.css';
 
+const InputComponent = (props) => (
+    <FormControl 
+        name={props.name} 
+        as={props.type === "textarea" ? "textarea" : "input"} 
+        {...props}
+        className="form-input"
+    />
+);
+
 export default function TextInput(props) {
     return (
-        <span className="text-input-container">
+        <span className="text-input-container my-2">
             <label htmlFor={props.name}>{props.label}</label>
             <span  className="form-error">
-                <ErrorMessage name={props.name} />
+                <ErrorMessage {...props} />
             </span>
-            <Field as={FormControl} name={props.name} type={props.type} className="form-input" />
+            <Field as={InputComponent} {...props} className="form-input" />
         </span>
     )
 }

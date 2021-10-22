@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
+import { Container, Row, Col } from 'react-bootstrap';
 
 import NewIssueForm from '../../components/form/NewIssueForm';
 import useResource from '../../hooks/useResource';
@@ -27,9 +27,9 @@ function NewIssuePage(props) {
 
         const createAnother = newIssue.createAnother;
         delete newIssue.createAnother;
-        
+
         const issue = await props.onSubmit(props.match.params.projectId, newIssue);
-        
+
         let callbacks = cb(null);
         const promises = [];
         attachments && attachments.forEach(file => {
@@ -55,11 +55,15 @@ function NewIssuePage(props) {
     }
 
     return (
-        redirect === true ? 
+        redirect === true ?
             <Redirect to={`/projects/${props.match.params.projectId}/issues`} /> :
             <Container fluid className="page">
-                <NewIssueForm onSubmit={addNewIssue} collaborators={collaborators.data}/>
-            </Container>
+                <Row className="form-container">
+                    <Col xs={12} sm={6}>
+                        <NewIssueForm onSubmit={addNewIssue} collaborators={collaborators.data} />
+                    </Col>
+                </Row>
+            </Container >
     )
 }
 

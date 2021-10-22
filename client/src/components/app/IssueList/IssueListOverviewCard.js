@@ -1,49 +1,57 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Row, Col } from 'react-bootstrap';
 import IssueListButtonToolbar from './IssueListButtonToolbar';
 
 function IssueListOverviewCard({ projectId, issue, ...props }) {
     return (
-        <Card style={{ height: '100%', width: '100%', display: 'flex', flexDirection: 'row', alignItems: "center" }}>
-            <Card.Body style={{ flex: 5 }}>
-                <Card.Title>{issue.title}</Card.Title>
-                <Card.Text>
-                    {issue.description}
-                </Card.Text>
-            </Card.Body>
+        <Card className="issue-list-card-container">
+            <Card.Body className="issue-list-card-body">
+                <Row className="issue-list-row">
+                    <Col sm={5} xl={2}>
+                        <Card.Title>{issue.title}</Card.Title>
+                    </Col>
+                    <Col sm={7} xl={3}>
+                        <Card.Text>
+                            {issue.description.slice(0, 64) + " ..."}
+                        </Card.Text>
+                    </Col>
+                    
+                    <Col xs={6} sm={2} xl={1} className="py-2">
+                        <Card.Subtitle>Category</Card.Subtitle>
+                        <Card.Text>
+                            {issue.category}
+                        </Card.Text>
+                    </Col>
 
-            <Card.Body style={{ flex: 1, height: "100%", borderLeft: '1px solid black' }}>
-                <Card.Title>Category</Card.Title>
-                <Card.Text>
-                    {issue.category}
-                </Card.Text>
-            </Card.Body>
 
-            <Card.Body style={{ flex: 1, borderLeft: '1px solid black' }}>
-                <Card.Title>Priority</Card.Title>
-                <Card.Text>
-                    {issue.priority}
-                </Card.Text>
-            </Card.Body>
+                    <Col xs={6} sm={2} xl={1} className="py-2">
+                        <Card.Subtitle>Priority</Card.Subtitle>
+                        <Card.Text>
+                            {issue.priority}
+                        </Card.Text>
+                    </Col>
 
-            <Card.Body style={{ flex: 1, borderLeft: '1px solid black' }}>
-                <Card.Title>Status</Card.Title>
-                <Card.Text>
-                    {issue.status}
-                </Card.Text>
-            </Card.Body>
+                    <Col xs={6} sm={2} xl={1} className="py-2">
+                        <Card.Subtitle>Status</Card.Subtitle>
+                        <Card.Text>
+                            {issue.status}
+                        </Card.Text>
+                    </Col>
 
-            <Card.Body style={{ flex: 1, borderLeft: '1px solid black' }}>
-                <Card.Title>Assigned</Card.Title>
-                <Card.Text>
-                    {issue.assignee ? issue.assignee : "None"}
-                </Card.Text>
-            </Card.Body>
 
-            <Card.Body style={{ flex: 2, height: "100%", borderLeft: '1px solid black' }}>
-                <IssueListButtonToolbar 
-                    projectId={projectId} issue={issue} {...props}
-                />
+                    <Col xs={6} sm={2} xl={1} className="py-2">
+                        <Card.Subtitle>Assigned</Card.Subtitle>
+                        <Card.Text>
+                            {issue.assignee ? issue.assignee : "None"}
+                        </Card.Text>
+                    </Col>
+
+                    <Col xs={12} sm={4} xl={1} className="py-2">
+                        <IssueListButtonToolbar 
+                            projectId={projectId} issue={issue} {...props}
+                        />
+                    </Col>
+                </Row>
             </Card.Body>
         </Card>
     )

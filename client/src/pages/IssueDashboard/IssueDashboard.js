@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
 
 import useAuth from '../../hooks/useAuth';
 import useResource from '../../hooks/useResource';
@@ -14,7 +14,6 @@ import useDialogBox from '../../hooks/useDialogBox';
 import useListParams from '../../hooks/useListParams';
 import SelectForm from '../../components/form/SelectForm';
 import InlineSearch from '../../components/form/InlineSearch';
-import ToggleButton from '../../components/display/Button/ToggleButton';
 import IssueDetailNavBar from '../../components/app/Navigation/IssueDetailNavBar';
 import IssueLog from '../IssueLog/IssueLog';
 import useNotificationBanner from '../../hooks/useNotificationBanner';
@@ -54,11 +53,6 @@ function IssueDashboard({ issues, ...props }) {
     const { show: showStartIssueDialogBox, RenderDialogBox: StartIssueDialogBox } = useDialogBox();
     const { show: showCloseIssueDialogBox, RenderDialogBox: CloseIssueDialogBox } = useDialogBox();
     const [listParams, changeListParams] = useListParams({ order: "desc", group: "category", filter: initialFilterValue, search: "" });
-    const [issueView, setIssueView] = useState('1');
-
-    const handleSelectIssueView = (view) => {
-        setIssueView(view);
-    }
 
     const handleDeleteIssue = async ({ data }) => {
         await props.onDelete(data.projectId, data.issueId);
@@ -141,15 +135,6 @@ function IssueDashboard({ issues, ...props }) {
                                 >
                                     Back to Projects
                                 </Button>
-                                <div>View style:</div>
-                                <ToggleButton 
-                                    radioValue={issueView} 
-                                    radios={[
-                                        { name: 'List', value: '1' },
-                                        { name: 'Table', value: '2' }
-                                    ]}
-                                    onSelect={handleSelectIssueView}
-                                />
                                 <InlineSearch 
                                     className="search-bar"
                                     onSubmit={(searchText) => { changeListParams("search", searchText) }}
@@ -161,23 +146,24 @@ function IssueDashboard({ issues, ...props }) {
                                 />
                             </>
                         )}/>
-                        <IssueList 
-                            projectId={props.match.params.projectId} 
-                            collaborators={collaborators.data}
-                            issueList={issues}
-                            viewAs={issueView}
+                        <Container fluid className="page light">
+                            <IssueList 
+                                projectId={props.match.params.projectId} 
+                                collaborators={collaborators.data}
+                                issueList={issues}
 
-                            groupBy={listParams.group}
-                            orderBy={listParams.order}
-                            filter={listParams.filter}
-                            searchText={listParams.search}
-                            searchKeys={["title", "description"]}
+                                groupBy={listParams.group}
+                                orderBy={listParams.order}
+                                filter={listParams.filter}
+                                searchText={listParams.search}
+                                searchKeys={["title", "description"]}
 
-                            onDelete={showDeleteIssueDialogBox}
-                            onAssign={showAssignIssueDialogBox}
-                            onStart={showStartIssueDialogBox}
-                            onClose={showCloseIssueDialogBox}
-                        />
+                                onDelete={showDeleteIssueDialogBox}
+                                onAssign={showAssignIssueDialogBox}
+                                onStart={showStartIssueDialogBox}
+                                onClose={showCloseIssueDialogBox}
+                            />
+                        </Container>
                     </>
                 )}/>
                 <Route path={`${props.match.path}/:issueId`} exact render={(routerProps) => {

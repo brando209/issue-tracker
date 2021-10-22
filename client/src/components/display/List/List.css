@@ -3,6 +3,7 @@
 
     display: flex;
     flex-direction: column;
+    color: #282c34;
 }
 
 .list-container .list-item {
@@ -12,30 +13,46 @@
 .list-container .list-item-group {
     display: flex;
     flex-direction: column;
-    margin-bottom: 5px;
+    margin: 5px 0;
 }
 
-.list-container .list-item-group .list-item {
+.list-container .list-item-group > .list-item:nth-child(2n-1) > * {
+    background-color: #e5e5dc;
+}
+
+.list-container .list-item-group > .list-item:nth-child(2n) > * {
+    background-color: #f5f5ea;
+}
+
+.list-container .list-item-group > .list-item:last-child > * {
+    border-radius: 0 0 5px 5px;
+}
+
+.list-container .list-item-group  .list-item {
     margin: 0;
-    border: 1px solid black;
+    border-radius: 0;
 }
 
 .list-container .list-item-group > .group-header {
     text-align: start;
     padding-left: 1em;
-    border: 1px solid black;
     border-bottom: none;
     min-height: 2em;
     font-weight: bold;
-    background: cornflowerblue;
+    background:  #598ba7;
 }
 
 .list-container .list-item-group > .group-header.collapsed {
     border-bottom: 1px solid black;
 }
 
+
+.list-container .list-item-group > .group-header {
+    border-radius: 5px 5px 0 0;
+}
+
 .list-container .list-item-group > .empty-group-message {
     min-height: 2em;
-    background: white;
-    border: 1px solid black;
+    background: #f5f5ea;
+    border-radius: 0 0 5px 5px;
 }

@@ -3,7 +3,6 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { Row, Col } from 'react-bootstrap';
 import { IssueSchema } from '../../utility/schema/validation';
 
-
 function EditIssueDetailsForm(props) {
     return(
         <Formik
