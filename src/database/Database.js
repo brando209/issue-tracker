@@ -64,7 +64,7 @@ class Database {
         const SQLColumns = columns === "*" ? columns : columns.join(",");
         const SQLJoin = joinOptions === null ? "" : joinOptions.map(value => (`${(value.joinType) ? value.joinType.toUpperCase() : "INNER"} JOIN ${value.joinTable} ON ${value.joinColumns}`)).join(" ");
         const SQLOptions = (options === "*" || options === []) ? "" : options.join(" AND ");
-        return this.runSqlQuery(`SELECT ${SQLColumns} FROM ${table} ${SQLJoin} ${rows === "*" ? "" : "WHERE"} ${SQLRows}${SQLOptions};`);
+        return this.runSqlQuery(`SELECT ${SQLColumns} FROM ${table} ${SQLJoin} ${rows === "*" ? "" : "WHERE"} ${SQLRows} ${SQLOptions};`);
     }
 
     async addRecord(table, record) {
