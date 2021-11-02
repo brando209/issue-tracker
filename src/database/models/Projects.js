@@ -19,15 +19,24 @@ class Projects {
     }
 
     getProjectsByUserId(userId) {
-        const columns = ["projects.id", "projects.name", "projects.description", "users.userName as creator"];
+        const columns = [
+            "projects.id", "projects.name", "projects.description", "users.userName as creator", 
+            "count(distinct pc2.collaboratorId) as totalCollaborators", "count(distinct i.id) as totalAssignedIssues"
+        ];
         const joinOptions = [{
             joinTable: "users",
             joinColumns: "projects.creatorId = users.id"
         }, {
-            joinTable: "project_collaborators pc",
-            joinColumns: "pc.projectId = projects.id"
+            joinTable: "project_collaborators pc1",
+            joinColumns: "pc1.projectId = projects.id"
+        }, {
+            joinTable: "project_collaborators pc2",
+            joinColumns: "pc2.projectId = projects.id"
+        }, {
+            joinTable: "issues i",
+            joinColumns: "i.projectId = projects.id and i.assigneeId = pc1.collaboratorId"
         }];
-        return this.table.getEntrys(columns, `pc.collaboratorId=${userId}`, joinOptions);
+        return this.table.getEntrys(columns, `pc1.collaboratorId=${userId}`, joinOptions, ["GROUP BY projects.id"]);
     }
 
     updateProject(projectId, updateObject, actorId = null) {
