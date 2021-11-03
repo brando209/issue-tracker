@@ -7,7 +7,8 @@ async function createIssue(projectId, issueInfo, authToken) {
         const issue = await axios.post(`/api/projects/${projectId}/issues`, issueInfo, { headers });
         return issue.data;
     } catch(err) {
-        console.log(err);
+        console.error(err);
+        throw err;
     }
 }
 
@@ -17,7 +18,8 @@ async function updateIssue(projectId, issueId, update, authToken) {
         const issue = await axios.patch(`/api/projects/${projectId}/issues/${issueId}`, update, { headers });
         return issue.data;
     } catch(err) {
-        console.log(err);
+        console.error(err);
+        throw err;
     }
 }
 
@@ -27,7 +29,8 @@ async function deleteIssue(projectId, issueId, authToken) {
         const issue = await axios.delete(`/api/projects/${projectId}/issues/${issueId}`, { headers });
         return issue.data;
     } catch(err) {
-        console.log(err);
+        console.error(err);
+        throw err;
     }
 }
 
@@ -41,7 +44,8 @@ async function assignIssue(projectId, issueId, assigneeId, authToken) {
         )
         return issue.data;
     } catch(err) {
-        console.log(err);
+        console.error(err);
+        throw err;
     }
 }
 
@@ -55,7 +59,8 @@ async function advanceIssue(projectId, issueId, status, authToken) {
         )
         return issue.data;
     } catch(err) {
-        console.log(err);
+        console.error(err);
+        throw err;
     }
 }
 
@@ -70,7 +75,8 @@ async function addComment(projectId, issueId, comment, authToken) {
         console.log(result);
         return result.data;
     } catch(err) {
-        console.log(err);
+        console.error(err);
+        throw err;
     }
 }
 
@@ -85,7 +91,8 @@ async function updateComment(projectId, issueId, commentId, comment, authToken) 
         console.log(result);
         return result.data;
     } catch(err) {
-        console.log(err);
+        console.error(err);
+        throw err;
     }
 }
 
@@ -99,7 +106,8 @@ async function deleteComment(projectId, issueId, commentId, authToken) {
         console.log(result);
         return result.data;
     } catch(err) {
-        console.log(err);
+        console.error(err);
+        throw err;
     }
 }
 
@@ -121,8 +129,8 @@ async function createAttachment(projectId, issueId, data, authToken, cb) {
             config
         )
     } catch(err) {
-        console.log(err);
-
+        console.error(err);
+        throw err;
     }
 }
 
@@ -134,7 +142,8 @@ async function getAttachment(projectId, issueId, attachmentId, authToken) {
             { headers }            
         );
     } catch(err) {
-        console.log(err);
+        console.error(err);
+        throw err;
     }
 }
 
@@ -148,7 +157,8 @@ async function deleteAttachment(projectId, issueId, attachmentId, authToken) {
         console.log(result);
         return result;
     } catch(err) {
-        console.log(err);
+        console.error(err);
+        throw err;
     }
 }
 
