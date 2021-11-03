@@ -15,9 +15,23 @@
     margin: 0.75rem 0;
 }
 
+
+.left-side {
+    flex: 1;
+    background-image: linear-gradient(135deg, #e5e5dc, #c0c0b7 50%);
+    border-radius: 5px 0 0 5px;
+    border-right: 2px solid #376b86;
+}
+
+.right-side { 
+    flex: 3;
+    background-color: #c0c0b7;
+    border-radius: 0 5px 5px 0;
+}
+
 @media (max-width: 1200px) {
     .project-list-card .content-group {
-        flex-direction: row;
+        flex-direction: column;
     }
 
     .project-list-card .content-group:nth-child(n) > :nth-child(n) {
@@ -34,15 +48,19 @@
 
 }
 
-.left-side {
-    flex: 1;
-    background-image: linear-gradient(135deg, #e5e5dc, #c0c0b7 50%);
-    border-radius: 5px 0 0 5px;
-    border-right: 2px solid #376b86;
+@media (max-width: 700px) {
+    .project-list-card {
+        flex-direction: column;
+    }
+
+    .left-side {
+        border-radius: 5px 5px 0 0;
+        border-right: none;
+        border-bottom: 2px solid #376b86;
+    }
+
+    .right-side {
+        border-radius: 0 0 5px 5px;
+    }
 }
 
-.right-side { 
-    flex: 3;
-    background-color: #c0c0b7;
-    border-radius: 0 5px 5px 0;
-}

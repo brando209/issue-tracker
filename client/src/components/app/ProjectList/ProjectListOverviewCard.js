@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Dropdown, DropdownButton, ButtonGroup, Row, Col } from 'react-bootstrap';
+import { Card, Button, ButtonGroup, Row, Col } from 'react-bootstrap';
 import LinkButton from '../../display/Button/LinkButton';
 
 function ProjectListOverviewCard({ project, onDelete, onEdit, onAddCollaborator }) {
@@ -7,7 +7,7 @@ function ProjectListOverviewCard({ project, onDelete, onEdit, onAddCollaborator 
         <Card className="project-list-card">
             <Card.Body className="left-side">
                 <Row>
-                    <Col className="my-1" xs={12} xl={1}>
+                    <Col className="my-1" xs={12} xl={6}>
                         <Card.Title>{project.name}</Card.Title>
                     </Col>
                     <Col className="my-1">
@@ -25,9 +25,12 @@ function ProjectListOverviewCard({ project, onDelete, onEdit, onAddCollaborator 
                 <Row>                    
                     <Col xs={12} xl={3} className="content-group">
                         <Card.Title className="content-group-title">Collaborators</Card.Title>
-                        <LinkButton className="mx-2" size="sm">View</LinkButton>
+                        <ButtonGroup className="buttons mx-2">
+                            <LinkButton size="sm">View</LinkButton>
+                            <Button variant="primary" size="sm" onClick={() => onAddCollaborator({projectId: project.id})}>Add</Button>
+                        </ButtonGroup>
                         <Card.Text>
-                            {"There are " + project.issues.length + " collaborators"}
+                            {"There are " + project.totalCollaborators + " collaborators"}
                         </Card.Text>
                     </Col>
 
@@ -35,7 +38,7 @@ function ProjectListOverviewCard({ project, onDelete, onEdit, onAddCollaborator 
                         <Card.Title className="content-group-title">Your Issues</Card.Title>
                         <LinkButton className="mx-2" size="sm">View My Issues</LinkButton>
                         <Card.Text>
-                            {"You have " + project.issues.length + " issues assigned to you"}
+                            {"You have " + project.totalAssignedIssues + " issues assigned to you"}
                         </Card.Text>
                     </Col>
 
