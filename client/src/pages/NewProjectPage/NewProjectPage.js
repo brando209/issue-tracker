@@ -12,10 +12,13 @@ function NewProjectPage(props) {
     const [redirect, setRedirect] = useState(false);
 
     const createNewProject = async (newProject) => {
-        console.log("Creating project with token " + auth.user.token);
-        await props.onSubmit(newProject);
-        notificationBanner.showNotificationWithText("Project successfully created!");
-        setRedirect(true);
+        try {
+            await props.onSubmit(newProject);
+            notificationBanner.showNotificationWithText("Project successfully created!");
+            setRedirect(true);
+        } catch(err) {
+            notificationBanner.showNotificationWithText(err.message);
+        }
     }
 
     return (

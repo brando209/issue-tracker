@@ -12,6 +12,7 @@ import LinkButton from '../../components/display/Button/LinkButton';
 import { removeTimezoneFromDateString } from '../../utility/strings';
 import './IssueDetails.css';
 import EditIssueDetailsForm from '../../components/form/EditIssueDetailsForm';
+import useNotificationBanner from '../../hooks/useNotificationBanner';
 
 function IssueDetails({ issue, onEdit, ...props }) {
     const auth = useAuth();
@@ -25,6 +26,7 @@ function IssueDetails({ issue, onEdit, ...props }) {
         auth.user ? auth.user.token : null
     );
     const [editMode, setEditMode] = useState(false);
+    const notificationBanner = useNotificationBanner();
     const { show: showDeleteCommentDialogBox, RenderDialogBox: DeleteCommentDialogBox } = useDialogBox();
 
     const EditSelect = withEdit(Col, "select");
@@ -42,41 +44,55 @@ function IssueDetails({ issue, onEdit, ...props }) {
     const handleAddComment = async (e) => {
         e.preventDefault();
         const commentData = e.target[1].value
-        const newComment = await issuesApi.addComment(props.match.params.projectId, issue.id, commentData, auth.user.token);
-        setComments(prev => {
-            const comments = prev.data.slice();
-            comments.push(newComment);
-            return { ...prev, data: comments }
-        });
-        const commentBox = document.querySelector("textarea#comment");
-        commentBox.value = "";
+        try {
+            const newComment = await issuesApi.addComment(props.match.params.projectId, issue.id, commentData, auth.user.token);
+            setComments(prev => {
+                const comments = prev.data.slice();
+                comments.push(newComment);
+                return { ...prev, data: comments }
+            });
+            const commentBox = document.querySelector("textarea#comment");
+            commentBox.value = "";
+            notificationBanner.showNotificationWithText("Comment successfully added");
+        } catch(err) {
+            notificationBanner.showNotificationWithText(err.message);
+        }
     }
 
     const handleDeleteComment = async ({ data }) => {
-        console.log("Deleting comment", data);
-        await issuesApi.deleteComment(props.match.params.projectId, issue.id, data.commentId, auth.user.token);
-        setComments(prev => {
-            const comments = prev.data.slice();
-            const commentIdx = comments.findIndex(comment => comment.id === data.commentId);
-            if(commentIdx !== -1) comments.splice(commentIdx, 1);
-            return { ...prev, data: comments };
-        })
+        try {
+            await issuesApi.deleteComment(props.match.params.projectId, issue.id, data.commentId, auth.user.token)
+            setComments(prev => {
+                    const comments = prev.data.slice();
+                    const commentIdx = comments.findIndex(comment => comment.id === data.commentId);
+                    if(commentIdx !== -1) comments.splice(commentIdx, 1);
+                    return { ...prev, data: comments };
+                });
+                notificationBanner.showNotificationWithText("Comment successfully deleted");
+        } catch(err) {
+            notificationBanner.showNotificationWithText(err.message);
+        }
     }
 
     const handleEditComment = async (commentId, commentData) => {
-        const comment = await issuesApi.updateComment(
-            props.match.params.projectId, 
-            issue.id, 
-            commentId, 
-            commentData.body, 
-            auth.user.token
-        );
-        setComments(prev => {
-            const comments = prev.data.slice();
-            const commentIdx = comments.findIndex(comment => comment.id === commentId);
-            comments[commentIdx] = comment;
-            return { ...prev, data: comments };
-        })
+        try {
+            const comment = await issuesApi.updateComment(
+                props.match.params.projectId, 
+                issue.id, 
+                commentId, 
+                commentData.body, 
+                auth.user.token
+            );
+            setComments(prev => {
+                const comments = prev.data.slice();
+                const commentIdx = comments.findIndex(comment => comment.id === commentId);
+                comments[commentIdx] = comment;
+                return { ...prev, data: comments };
+            });
+            notificationBanner.showNotificationWithText("Comment successfully edited");
+        } catch(err) {
+            notificationBanner.showNotificationWithText(err.message);
+        }
     }
 
     const advanceButtonText = (issue.status === "unassigned") ? "Assign Issue" :

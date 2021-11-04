@@ -33,8 +33,12 @@ function ProjectDashboard({ match }) {
                 closeButtonText="Cancel"
                 submitButtonText="Delete"
                 onSubmit={async (project) => {
-                    await projects.handleDeleteProject(project);
-                    notificationBanner.showNotificationWithText("Project Successfully Deleted!");
+                    try {
+                        await projects.handleDeleteProject(project)
+                        notificationBanner.showNotificationWithText("Project Successfully Deleted!");
+                    } catch(err) {
+                         notificationBanner.showNotificationWithText(err.message);
+                    }
                 }}
                 render={({ data }) => 'Are you sure you would like to delete project with id ' + data.projectId + '?'}
             />
@@ -43,10 +47,14 @@ function ProjectDashboard({ match }) {
                 submitButtonText="Add"
                 formId="collaborator-select-form"
                 onSubmit={async (data) => {
-                    await projects.handleAddCollaborator(data);
-                    notificationBanner.showNotificationWithText("Collaborator Successfully Added to Project!");
+                    try {
+                        await projects.handleAddCollaborator(data)
+                        notificationBanner.showNotificationWithText("Collaborator Successfully Added to Project!");
+                    } catch(err) {
+                        notificationBanner.showNotificationWithText(err.message);
+                    }
                 }}
-                render={() => (
+                render={() => ( 
                     <SelectForm 
                         formId="collaborator-select-form"
                         fieldName="collaboratorId"
@@ -59,7 +67,7 @@ function ProjectDashboard({ match }) {
             <Switch>
                 <Route path={match.url} exact render={() => (
                     <>
-                    <ProjectsNavBar />
+                        <ProjectsNavBar />
                         <Container className="page light" fluid>
                             <ProjectList 
                                 projectList={projects.data} 

@@ -55,23 +55,39 @@ function IssueDashboard({ issues, ...props }) {
     const [listParams, changeListParams] = useListParams({ order: "desc", group: "category", filter: initialFilterValue, search: "" });
 
     const handleDeleteIssue = async ({ data }) => {
-        await props.onDelete(data.projectId, data.issueId);
-        notificationBanner.showNotificationWithText("Issue Successfully Deleted!");
+        try {
+            await props.onDelete(data.projectId, data.issueId)
+            notificationBanner.showNotificationWithText("Issue Successfully Deleted!");
+        } catch(err) {
+            notificationBanner.showNotificationWithText(err.message);
+        }
     }
 
     const handleAssignIssue = async ({ data, values }) => {
-        await props.onAssign(data.projectId, data.issueId, values.collaboratorId);
-        notificationBanner.showNotificationWithText("Issue Successfully Assigned!")
+        try {
+            await props.onAssign(data.projectId, data.issueId, values.collaboratorId)
+            notificationBanner.showNotificationWithText("Issue Successfully Assigned!");
+        } catch(err) {
+            notificationBanner.showNotificationWithText(err.message);
+        }
     }
 
     const handleStartIssue = async ({ data }) => {
-        await props.onStart(data.projectId, data.issueId);
-        notificationBanner.showNotificationWithText("Issue Successfully Advanced to In-Progress!");
+        try {
+            props.onStart(await data.projectId, data.issueId)
+            notificationBanner.showNotificationWithText("Issue Successfully Advanced to In-Progress!");
+        } catch(err) {
+            notificationBanner.showNotificationWithText(err.message);
+        }
     }
 
     const handleCloseIssue = async ({ data, values }) => {
-        await props.onClose(data.projectId, data.issueId, values.status);
-        notificationBanner.showNotificationWithText("Issue Completed!");
+        try {
+            await props.onClose(data.projectId, data.issueId, values.status)
+            notificationBanner.showNotificationWithText("Issue Completed!");
+        } catch(err) {
+            notificationBanner.showNotificationWithText(err.message);
+        }
     }
     
     return (

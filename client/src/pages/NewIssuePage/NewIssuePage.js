@@ -22,36 +22,40 @@ function NewIssuePage(props) {
     }
 
     const addNewIssue = async (newIssue, cb) => {
-        const attachments = newIssue.attachments;
-        delete newIssue.attachments;
+        try {
+            const attachments = newIssue.attachments;
+            delete newIssue.attachments;
 
-        const createAnother = newIssue.createAnother;
-        delete newIssue.createAnother;
+            const createAnother = newIssue.createAnother;
+            delete newIssue.createAnother;
 
-        const issue = await props.onSubmit(props.match.params.projectId, newIssue);
+            const issue = await props.onSubmit(props.match.params.projectId, newIssue);
 
-        let callbacks = cb(null);
-        const promises = [];
-        attachments && attachments.forEach(file => {
-            callbacks = cb(file);
-            const data = new FormData();
-            data.append('attachments', file);
-            promises.push(addIssueAttachment(issue.id, data, callbacks.progressCb));
-        })
-
-        const attachmentHandles = await Promise.all(promises)
-            .then(responses => responses.map(response => response.data.id))
-            .then(data => {
-                callbacks.successCb();
-                return data;
+            let callbacks = cb(null);
+            const promises = [];
+            attachments && attachments.forEach(file => {
+                callbacks = cb(file);
+                const data = new FormData();
+                data.append('attachments', file);
+                promises.push(addIssueAttachment(issue.id, data, callbacks.progressCb));
             })
-            .catch(err => callbacks.failureCb(err));
 
-        props.onAddAttachment(props.match.params.projectId, issue.id, attachmentHandles);
+            const attachmentHandles = await Promise.all(promises)
+                .then(responses => responses.map(response => response.data.id))
+                .then(data => {
+                    callbacks.successCb();
+                    return data;
+                })
+                .catch(err => callbacks.failureCb(err));
 
-        notificationBanner.showNotificationWithText("Issue successfully added!");
+            props.onAddAttachment(props.match.params.projectId, issue.id, attachmentHandles);
 
-        setRedirect(createAnother ? false : true);
+            notificationBanner.showNotificationWithText("Issue successfully added!");
+
+            setRedirect(createAnother ? false : true);
+        } catch(err) {
+            notificationBanner.showNotificationWithText(err.message);
+        }
     }
 
     return (
