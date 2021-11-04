@@ -2,16 +2,17 @@ import React from 'react';
 import { Card, Button, ButtonGroup, Row, Col } from 'react-bootstrap';
 import LinkButton from '../../display/Button/LinkButton';
 
-function ProjectListOverviewCard({ project, onDelete, onEdit, onAddCollaborator }) {
+function ProjectListOverviewCard({ project, onDelete, onAddCollaborator }) {
     return (
         <Card className="project-list-card">
             <Card.Body className="left-side">
                 <Row>
-                    <Col className="my-1" xs={12} xl={6}>
+                    <Col className="my-1" xs={12} sm={6} xl={6}>
                         <Card.Title>{project.name}</Card.Title>
                     </Col>
-                    <Col className="my-1">
-                        <LinkButton size="sm">View Details</LinkButton>
+                    <Col className="my-1" sm={6} xl={6}>
+                        <LinkButton size="sm" className="" to={`/projects/${project.id}`}>Details</LinkButton>
+                        <Button size="sm" className="m-1" onClick={() => onDelete({ projectId: project.id })}>Delete</Button>
                     </Col>
                     <Col className="my-1" xs={12} xl={12}>
                         <Card.Text>
