@@ -17,7 +17,7 @@ function TopNavBar(props) {
     }
     
     return (
-        <NavBar title="Issue Tracker" logo={logo} bg="dark" expand="md" render={() => (
+        <NavBar title="Issue Tracker" logo={logo} bg="dark" expand="sm" render={() => (
             <Nav >
                 { !auth.user ? <LinkButton className="m-sm-1" to="login">Login</LinkButton> : null }
                 { !auth.user ? <LinkButton className="m-sm-1" to="signup">Signup</LinkButton> : null }

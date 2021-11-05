@@ -9,7 +9,7 @@ function IssueNavBar({ render }) {
         <NavBar title="Issues" bg="light" expand="lg" render={() => (
             <Nav>
                 {render()}
-                <LinkButton to="issues/new" variant="outline-dark" className="m-sm-1">Add New Issue</LinkButton>
+                <LinkButton to="issues/new" variant="outline-secondary" className="m-sm-1">Add New Issue</LinkButton>
             </Nav>
         )}/>
     )

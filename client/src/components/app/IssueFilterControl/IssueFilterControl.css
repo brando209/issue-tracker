@@ -1,3 +1,8 @@
+.filter-controls {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
 .filterDropdown > .dropdown-menu {
     width: 550px;
 }
@@ -10,4 +15,10 @@
 .checkmark {
     display: inline-block;
     font-size: 1.5rem;
+}
+
+@media (max-width: 1048px) {
+    .filter-controls {
+        width: 210px;
+    }
 }

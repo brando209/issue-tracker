@@ -8,9 +8,9 @@ function InlineSearch(props) {
     }
 
     return (
-        <Form inline noValidate onSubmit={handleSubmit} className={props.className}>
-            <FormControl type="text" name="search" placeholder="Search" className="mr-sm-2" />
-            <Button type="submit" variant="outline-info">Search</Button>
+        <Form inline noValidate onSubmit={handleSubmit} className={props.className} style={{ alignItems: "flex-start", paddingTop: "0.25rem", flexWrap: "nowrap" }}>
+            <FormControl type="text" name="search" placeholder="Search" className="ml-2 mr-1"/>
+            <Button type="submit" variant="outline-info" className="mx-1">Search</Button>
         </Form>
     )
 

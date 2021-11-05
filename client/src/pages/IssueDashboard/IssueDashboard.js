@@ -146,10 +146,10 @@ function IssueDashboard({ issues, ...props }) {
                             <>
                                 <Button 
                                     className="stick-left" 
-                                    variant="outline-primary"
+                                    variant="outline-secondary"
                                     onClick={() => { props.history.push('/projects') }}
                                 >
-                                    Back to Projects
+                                    All Projects
                                 </Button>
                                 <InlineSearch 
                                     className="search-bar"
@@ -199,6 +199,7 @@ function IssueDashboard({ issues, ...props }) {
                                 onClose={showCloseIssueDialogBox}
                                 onCreateAttachmentRequest={props.onCreateAttachmentRequest}
                                 onAddAttachment={props.onAddAttachment}
+                                onRemoveAttachment={props.onRemoveAttachment}
                             />
                         </>
                     )
