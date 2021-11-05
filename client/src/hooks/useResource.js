@@ -30,6 +30,7 @@ function useResource(path, authToken, forkedPaths = null) {
                     response = await Promise.all(promises);
 
                     const responseData = response.map(res => ({
+                        id: res.headers['content-fileid'],
                         filename: res.headers['content-filename'],
                         data: res.data
                     }));

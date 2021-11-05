@@ -95,6 +95,20 @@ function IssueDetails({ issue, onEdit, ...props }) {
         }
     }
 
+    const handleRemoveAttachment = async (attachmentId) => {
+        try {
+            await props.onRemoveAttachment(props.match.params.projectId, issue.id, attachmentId, auth.user.token);
+            setAttachments(prev => {
+                const attachments = prev.data.slice();
+                const attachmentIdx = attachments.findIndex(attachment => attachment.id === attachmentId);
+                if(attachmentIdx !== -1) attachments.splice(attachmentIdx, 1);
+                return { ...prev, data: attachments };
+            });
+        } catch(err) {
+            console.error(err);
+        }
+    }
+
     const advanceButtonText = (issue.status === "unassigned") ? "Assign Issue" :
         (issue.status === "open") ? "Advance Issue" :
         (issue.status === "inprogress") ? "Close Issue" : 
@@ -113,6 +127,7 @@ function IssueDetails({ issue, onEdit, ...props }) {
                     <> 
                         <Button
                             className="stick-left"
+                            variant="outline-dark"
                             onClick={() => { props.history.goBack() }
                         }>Back to All Issues</Button>
                         {editMode &&
@@ -269,6 +284,10 @@ function IssueDetails({ issue, onEdit, ...props }) {
                                     attachmentHandles
                                 )
                                 getAttachments();
+                            }}
+                            onDelete={(id) => {
+                                console.log(id);
+                                handleRemoveAttachment(id)
                             }}
                         />
                     </Col>

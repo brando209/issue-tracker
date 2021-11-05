@@ -100,6 +100,7 @@ function ProjectDashboard({ match }) {
                             onEdit={projects.handleEditIssue}
                             onCreateAttachmentRequest={projects.handleIssueAttachmentRequest}
                             onAddAttachment={projects.addIssueAttachmentHandles}
+                            onRemoveAttachment={projects.handleRemoveIssueAttachment}
                         />
                     )
                 }}/>

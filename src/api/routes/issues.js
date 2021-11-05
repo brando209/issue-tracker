@@ -157,7 +157,9 @@ router.get('/:issueId/attachments/:fileId', async (req, res) => {
         if(!filePath) return res.send("File does not exist");
         fs.readFile(filePath, (err, data) => {
             if(err) console.log(err);
-            res.contentType('application/pdf').append('Content-Filename', file.data.name)
+            res.contentType('application/pdf')
+                .append('Content-Filename', file.data.name)
+                .append('Content-FileID', file.data.id)
                 .append('Access-Control-Expose-Headers', 'Content-Filename')
                 .send(`data:application/pdf;base64,${new Buffer.from(data).toString('base64')}`);
         });

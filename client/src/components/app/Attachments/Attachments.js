@@ -11,7 +11,9 @@ function Attachments(props) {
                 <li key={`attachment-${idx}`}>
                     <span>{attachment.filename}</span>{" "}
                     <a href={attachment.data} download={attachment.filename}>Download</a>{" "}
-                    <button className="link" onClick={() => props.onDelete(attachment.id)}>Remove</button>
+                    <button className="link" onClick={() => {
+                        props.onDelete(attachment.id)
+                    }}>Remove</button>
                 </li>
             )
         });

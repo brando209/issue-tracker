@@ -133,7 +133,6 @@ function useProvideProjects() {
     }
 
     const handleIssueAttachmentRequest = async (projectId, issueId, data, cb) => {
-        console.log("in context")
         return issuesApi.createAttachment(projectId, issueId, data, auth.user.token, cb);
     }
 
@@ -151,6 +150,10 @@ function useProvideProjects() {
         });
     }
 
+    const handleRemoveIssueAttachment = async (projectId, issueId, attachmentId) => {
+        await issuesApi.deleteAttachment(projectId, issueId, attachmentId, auth.user.token);
+    }
+
     return {
         data: projects.data,
         handleDeleteProject,
@@ -164,6 +167,7 @@ function useProvideProjects() {
         handleStartIssue,
         handleCloseIssue,
         handleIssueAttachmentRequest,
-        addIssueAttachmentHandles
+        handleRemoveIssueAttachment,
+        addIssueAttachmentHandles,
     }
 }
